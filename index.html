@@ -86,7 +86,7 @@ var svg = d3.select("body").append("svg")
 	// add the y Axis
   svg.append("g")
       .attr("class", "y axis")//;
-      .call(y_axis).ticks(10, "%");
+      .call((y_axis).ticks(10, "%"));
 		      
 	// Add a small label for the graph name.
   svg.append("text")
