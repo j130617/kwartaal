@@ -94,14 +94,14 @@ var svg = d3.select("body").append("svg")
       .attr("x", 0 - (height / 2))
       .style("text-anchor", "middle")
       .style("font-size", 13)
-      .text("x miljard euro");
+      //.text("x miljard euro");
   svg.append("text")
       .attr("x", 20)  // space legend
       .attr("y", height + 40)
       .attr("class", "legend")    // style the legend
       .style("text-anchor", "middle")
       .style("font-size", 11)
-      .text("Bron: Test2"); 
+      .text("Bron: Thuiswinkel Marktmonitor"); 
 		
 function update(year) {
     d3.csv('kwart_data_' + year + '.csv', function(data) {
@@ -111,7 +111,7 @@ function update(year) {
     	d.value = +d.value;
   	});
 	    
-	x.domain(data.map(function(d) { return d.month; }));
+	x.domain(data.map(function(d) { return d.branche; }));
   	y.domain([0, d3.max(data, function(d) { return d.value; })]);
 	
         var bars = svg.selectAll('.bar')
@@ -130,7 +130,7 @@ function update(year) {
         //update
         new_bars.merge(bars)
             //.transition(t)
-            .attr('x', function(d) {return x(d.month);})
+            .attr('x', function(d) {return x(d.branche);})
             .attr('y', function(d) {return y(d.value);})
             .attr('height', function(d) {return height - y(d.value);})
             //.attr('fill', function(d) {return colour_scale(d.value);
@@ -139,7 +139,7 @@ function update(year) {
               	.style("left", d3.event.pageX + 10 + "px")
               	.style("top", d3.event.pageY - 25 + "px")
               	.style("display", "inline-block")
-              	.html((d.month) + "<br>" + "€ " + (d.value) + " miljard");
+              	.html((d.branche) + "<br>" + "€ " + (d.value) + " miljard");
         })
     		.on("mouseout", function(d){ tooltip.style("display", "none");});			      
         
